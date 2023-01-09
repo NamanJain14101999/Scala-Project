@@ -15,7 +15,9 @@ case class Department(Name:String) extends AbstarctDepartments {
 
   override def getElderEmployee(): Employee = this.employeeList.maxBy(emp=>emp.age)
 
-  override def getYoungerEmployee(): Employee  = this.employeeList.minBy(emp=>emp.age)
+  override def getYoungerEmployee(): Employee  ={
+//    employeeList.addOne(new Employee("cehck",32))
+    this.employeeList.minBy(emp=>emp.age)}
 
   override def totalDepartmentAge(): Int = {
     def totalAge(employe:ListBuffer[Employee]):Int= {
@@ -33,30 +35,51 @@ case class Department(Name:String) extends AbstarctDepartments {
 
   override def aviableDepartmentVacancy(): Int = 6 - getTotalEmployee()
 
-  override def addEmployee(emp: Employee): DepartmentStatus = {
+//  override def addEmployee(emp: Employee): DepartmentStatus = {
+//    employeeList.length match {
+//      case employeeList.length > 5 => DepartmentStatus.FAIL
+//      case _ => {
+//        if(emp.age<21)
+//          DepartmentStatus.AGE
+//        else
+//          {
+//            employeeList+=emp
+//            DepartmentStatus.SUCCESS
+//
+//          }
+//      }
+//    }
+////    if (employeeList.length > 5) {
+////      return DepartmentStatus.FAIL
+////    } else {
+////      if (emp.age > 21) {
+////        employeeList += emp
+////        return DepartmentStatus.SUCCESS
+////      } else {
+////        return DepartmentStatus.AGE
+////      }
+////    }
+//  }
+
+  override def addEmployee(empSet: Seq[Employee]): DepartmentStatus = {
     employeeList.length match {
       case 5 => DepartmentStatus.FAIL
       case _ => {
-        if(emp.age<21)
+        val result = empSet.filter(_.age<21)
+        if ( !result.isEmpty)
           DepartmentStatus.AGE
-        else
-          {
-            employeeList+=emp
-            DepartmentStatus.SUCCESS
+        else {
 
-          }
+          empSet.foreach(item=>employeeList+=item)
+//          for {
+//            emp <- empSeq
+//          } employeeList += emp
+          DepartmentStatus.SUCCESS
+
+
+        }
       }
     }
-//    if (employeeList.length > 5) {
-//      return DepartmentStatus.FAIL
-//    } else {
-//      if (emp.age > 21) {
-//        employeeList += emp
-//        return DepartmentStatus.SUCCESS
-//      } else {
-//        return DepartmentStatus.AGE
-//      }
-//    }
   }
 
   override def getTotalEmployee(): Int = employeeList.length

@@ -10,7 +10,7 @@ abstract class AbstarctDepartments {
      def totalDepartmentAge(): Int
      def averageDepartmentAge(): Double
      def aviableDepartmentVacancy(): Int
-     def addEmployee(emp: Employee): DepartmentStatus
+     def addEmployee(emp: Seq[Employee]): DepartmentStatus
      def getTotalEmployee(): Int
 
 }
