@@ -11,7 +11,8 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 case class Department(Name:String) extends AbstarctDepartments {
 
   override val departmentName: String = Name
-  val employeeList:ListBuffer[Employee] = ListBuffer[Employee]()
+
+  private val employeeList:ListBuffer[Employee] = ListBuffer[Employee]()
 
   override def getElderEmployee(): Employee = this.employeeList.maxBy(emp=>emp.age)
 

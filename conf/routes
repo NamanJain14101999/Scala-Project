@@ -9,6 +9,7 @@ GET     /department/BOD/:text       controllers.BoardOfDirectorsDepartmentContro
 GET     /department/ED/:text       controllers.EngineeringDepartmentController.ED(text:String)
 GET     /department/S/:text       controllers.ServicesDepartmentController.S(text:String)
 GET     /department/O/:text       controllers.OperationsDepartmentController.O(text:String)
+GET     /ITT/:text                controllers.ITTController.itt(text:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
