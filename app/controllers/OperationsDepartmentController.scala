@@ -13,34 +13,14 @@ class OperationsDepartmentController @Inject()(val controllerComponents: Control
   def O(text: String) = Action {
     val o = new Operations("Operations")
     o.addEmployees()
-
-    var result: String = null
-    if (text == "totalDepartmentAge") {
-      result =o.totalDepartmentAge().toString
-      Ok(result)
-    }
-    else if (text == "getElderEmployeeAge") {
-      result = o.getElderEmployee().toString
-      Ok(result)
-
-    }
-    else if (text == "getYoungerEmployeeAge") {
-      result = o.getYoungerEmployee().toString
-      Ok(result)
-    }
-    else if (text == "averageDepartmentAge") {
-      result = o.averageDepartmentAge().toString
-      Ok(result)
-    }
-    else if (text == "aviableDepartmentVacancy") {
-      result = o.aviableDepartmentVacancy().toString
-      Ok(result)
-    } else if (text == "getTotalEmployee") {
-      result = o.getTotalEmployee().toString
-      Ok(result)
-    }
-    else {
-      NotFound("not able to found the data")
+    text match {
+      case "totalDepartmentAge" => Ok(Json.toJson(o.totalDepartmentAge()))
+      case "getElderEmployeeAge" => Ok(Json.toJson(o.getElderEmployee()))
+      case "getYoungerEmployeeAge" => Ok(Json.toJson(o.getYoungerEmployee()))
+      case "averageDepartmentAge" => Ok(Json.toJson(o.averageDepartmentAge()))
+      case "aviableDepartmentVacancy" => Ok(Json.toJson(o.aviableDepartmentVacancy()))
+      case "getTotalEmployee" => Ok(Json.toJson(o.getTotalEmployee()))
+      case _ => NotFound("PATH IS NOT CORRECT")
     }
 
 

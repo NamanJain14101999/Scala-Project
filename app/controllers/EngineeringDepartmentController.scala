@@ -10,38 +10,17 @@ import Models._
 class EngineeringDepartmentController@Inject()(val controllerComponents: ControllerComponents) extends BaseController  {
   implicit val employeeJson = Json.format[Employee]
 
-
-
   def ED(text: String) = Action {
     val ed = new EngineeringDepartment("Engineering Department")
     ed.addEmployees()
-    var result: String = null
-    if (text == "totalDepartmentAge") {
-      result = ed.totalDepartmentAge().toString
-      Ok(result)
-    }
-    else if (text == "getElderEmployeeAge") {
-      result = ed.getElderEmployee().toString
-      Ok(result)
-
-    }
-    else if (text == "getYoungerEmployeeAge") {
-      result = ed.getYoungerEmployee().toString
-      Ok(result)
-    }
-    else if (text == "averageDepartmentAge") {
-      result = ed.averageDepartmentAge().toString
-      Ok(result)
-    }
-    else if (text == "aviableDepartmentVacancy") {
-      result = ed.aviableDepartmentVacancy().toString
-      Ok(result)
-    } else if (text == "getTotalEmployee") {
-      result = ed.getTotalEmployee().toString
-      Ok(result)
-    }
-    else {
-      NotFound("not able to found the data")
+    text match {
+      case "totalDepartmentAge" => Ok(Json.toJson(ed.totalDepartmentAge()))
+      case "getElderEmployeeAge" => Ok(Json.toJson(ed.getElderEmployee()))
+      case "getYoungerEmployeeAge" => Ok(Json.toJson(ed.getYoungerEmployee()))
+      case "averageDepartmentAge" => Ok(Json.toJson(ed.averageDepartmentAge()))
+      case "aviableDepartmentVacancy" => Ok(Json.toJson(ed.aviableDepartmentVacancy()))
+      case "getTotalEmployee" => Ok(Json.toJson(ed.getTotalEmployee()))
+      case _ => NotFound("PATH IS NOT CORRECT")
     }
 
 
